@@ -19,5 +19,13 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        User::factory()->create([
+            'name' => 'Test Admin',
+            'email' => 'Admin@example.com',
+            'password' => '123'
+        ]);
+        \App\Models\Anggota::factory(5)->create();
+        \App\Models\Book::factory(5)->create();
     }
 }

@@ -15,8 +15,8 @@ class Anggota extends Model
     ];
 
     
-    // public function loans ()
-    // {
-    //     return $this->hasMany(loans::class,'loans_id');
-    // }
+    public function loans ()
+    {
+        return $this->hasMany(loans::class,'loans_id');
+    }
 }

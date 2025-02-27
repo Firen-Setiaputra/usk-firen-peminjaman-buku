@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('kode_buku')->unique();
             $table->string('nama_buku');
+            $table->string('penulis')->nullable();
+            $table->string('penerbit')->nullable();
+            $table->integer('isbn')->nullable();
             $table->enum('kategori',['novel','cerita-anak','manga', 'lainnya']);
             $table->integer('stock')->default(0);
             $table->text('deskripsi')->nullable();

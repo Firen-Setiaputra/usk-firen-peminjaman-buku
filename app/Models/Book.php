@@ -11,8 +11,12 @@ class Book extends Model
     use HasFactory;
 
     protected $fillable = [
-        'kode_buku','nama_buku','kategori','stock','deskripsi','status'
+        'id','kode_buku','nama_buku','penulis', 'penerbit','tahun','isbn','kategori','stock','deskripsi','status'
     ];
 
     
+    public function loans ()
+    {
+        return $this->hasMany(loans::class,'loans_id');
+    }
 }

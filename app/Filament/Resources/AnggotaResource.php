@@ -23,7 +23,26 @@ class AnggotaResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('nama')
+                    ->label('Nama lengkap')
+                    ->placeholder('Masukkan Nama Lengkap')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('email')
+                ->label('Email')
+                    ->placeholder('dengan @gmail.com')
+                    ->email()
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('alamat')
+                ->label('Alamat')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('telepon')
+                    ->tel()
+                    ->numeric()
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -31,7 +50,17 @@ class AnggotaResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('nama')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                ->sortable()    
+                ->searchable(),
+                Tables\Columns\TextColumn::make('alamat')
+                ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('telepon')
+                    ->searchable(),
             ])
             ->filters([
                 //
