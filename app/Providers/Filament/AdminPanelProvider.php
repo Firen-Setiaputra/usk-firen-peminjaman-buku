@@ -32,12 +32,12 @@ class AdminPanelProvider extends PanelProvider
             ->registration()
             ->passwordReset()
             ->colors([
-                'primary' => Color::Purple,  
-                'secondary' => Color::Teal, 
-                'success' => Color::Lime, 
-                'danger' => Color::Pink, 
-                'warning' => Color::Orange,
+                'danger' => Color::Rose,
+                'gray' => Color::Cyan,
                 'info' => Color::Sky,
+                'primary' => Color::Cyan,
+                'success' => Color::Emerald,
+                'warning' => Color::Orange,                
 
 
             ])

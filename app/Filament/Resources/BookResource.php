@@ -17,7 +17,11 @@ class BookResource extends Resource
 {
     protected static ?string $model = Book::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-book-open';
+    protected static ?string $navigationLabel = 'Buku';
+
+    protected static ?string $pluralModelLabel = 'Daftar Buku';
+
 
     public static function form(Form $form): Form
     {
@@ -39,11 +43,6 @@ class BookResource extends Resource
                 Forms\Components\TextInput::make('penerbit')
                 ->label('Penerbit')
                     ->maxLength(255)
-                    ->required(),
-                Forms\Components\TextInput::make('isbn')
-                ->label('ISBN')
-                    ->numeric()
-                    ->maxLength(13)
                     ->required(),
                     Forms\Components\Select::make('kategori')
                     ->label('Kategori')
@@ -69,7 +68,7 @@ class BookResource extends Resource
                         'tersedia' => 'tersedia',
                         'rusak' => 'rusak',
                         'dipinjam' => 'dipinjam',
-                    ]),
+                    ])->default('tersedia'),
             ]);
     }
 
@@ -81,6 +80,11 @@ class BookResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nama_buku')
                     ->searchable(),
+                    Tables\Columns\TextColumn::make('penulis')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('penerbit')
+                    ->searchable()
+                    ->wrap(),
                 Tables\Columns\TextColumn::make('kategori'),
                 Tables\Columns\TextColumn::make('stock')
                     ->numeric()
@@ -104,7 +108,9 @@ class BookResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

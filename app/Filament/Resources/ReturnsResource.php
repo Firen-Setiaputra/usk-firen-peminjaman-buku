@@ -18,7 +18,11 @@ class ReturnsResource extends Resource
 {
     protected static ?string $model = Returns::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
+
+    protected static ?string $navigationLabel = 'Pengembalian';
+
+    protected static ?string $pluralModelLabel = 'transaksi Pengembalian';  
 
     public static function form(Form $form): Form
     {
@@ -29,7 +33,7 @@ class ReturnsResource extends Resource
                 ->options(
                     Loans::where('status', 'dipinjam')
                         ->get()
-                        ->mapWithKeys(fn ($loans) => [
+                        ->mapWithKeys(fn ($loans) => [ //key value
                             $loans->id => "Anggota: {$loans->anggota->nama} - Buku: {$loans->book->nama_asset}"
                         ])
                 )
@@ -39,7 +43,9 @@ class ReturnsResource extends Resource
                 ->label('Tanggal Pengembalian Sebenarnya')
                 ->default(now())
                 ->required()
-                ->maxDate(now()),
+                ->maxDate(now())
+                // ->disabled(),
+                ->readOnly(),
             ]);
     }
 
@@ -70,7 +76,9 @@ class ReturnsResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

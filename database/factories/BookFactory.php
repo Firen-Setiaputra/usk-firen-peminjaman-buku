@@ -22,7 +22,6 @@ class BookFactory extends Factory
             'nama_buku' => $this->faker->word(),
             'penulis' => $this->faker->name(),
             'penerbit' => $this->faker->company(),
-            'isbn' => $this->faker->randomNumber(9, true), // ISBN biasanya 10 atau 13 digit
             'kategori' => $this->faker->randomElement(['novel', 'cerita-anak', 'manga', 'lainnya']),
             'stock' => $this->faker->numberBetween(1, 100),
             'deskripsi' => $this->faker->sentence(),

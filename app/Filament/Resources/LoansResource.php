@@ -12,12 +12,17 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Notification;
 
 class LoansResource extends Resource
 {
     protected static ?string $model = Loans::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-square-3-stack-3d';
+    protected static ?string $navigationLabel = 'Peminjaman';
+
+    protected static ?string $pluralModelLabel = 'transaksi peminjaman';
+
 
     public static function form(Form $form): Form
     {
@@ -33,6 +38,7 @@ class LoansResource extends Resource
                 ->relationship('book','nama_buku')
                     ->required(),
                 Forms\Components\DatePicker::make('tanggal_peminjaman')
+                ->label('Tanggal saat Meminjam')
                 ->default(now())//jangan lupa di migrasi kasih ini juga atau nullable
                 // ->disabled()
                 ->readOnly()
@@ -46,6 +52,7 @@ class LoansResource extends Resource
                 ->disabled()
                 // ->readonly()
                 ->required(),
+                
             ]);
     }
 
@@ -77,7 +84,9 @@ class LoansResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -85,6 +94,15 @@ class LoansResource extends Resource
                 ]),
             ]);
     }
+
+
+// public static function afterSave($record): void
+// {
+//     Notification::make()
+//         ->title('Data berhasil disimpan!')
+//         ->color('success')
+//         ->send();
+// }
 
     public static function getRelations(): array
     {

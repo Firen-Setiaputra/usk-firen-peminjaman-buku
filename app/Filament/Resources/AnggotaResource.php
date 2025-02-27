@@ -17,7 +17,8 @@ class AnggotaResource extends Resource
 {
     protected static ?string $model = Anggota::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-user-group';
+    protected static ?string $pluralModelLabel = 'Anggota';
 
     public static function form(Form $form): Form
     {
@@ -58,6 +59,7 @@ class AnggotaResource extends Resource
                 ->searchable(),
                 Tables\Columns\TextColumn::make('alamat')
                 ->sortable()
+                ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('telepon')
                     ->searchable(),
